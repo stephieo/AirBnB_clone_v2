@@ -139,16 +139,17 @@ class HBNBCommand(cmd.Cmd):
                     elif (type(eval(value)) is str):
                         value = value[1:-1].replace('_', ' ').replace('"', '\"')
                     else:
-                        print(type(eval(value)))
                         return
-                    if hasattr(eval(args[0]), param):  # ensures only know attributes
-                        attributes[param] = value
+                    attributes[param] = value
 
                 if attributes:
                     new_instance = HBNBCommand.classes[args[0]]()
                     new_instance.__dict__.update(**attributes)
                     print(new_instance.id)
+                    new_instance.new()
+                    print("------------------------------")
                     storage.save()
+                    print("------------------------------")
 
         except Exception as e:
             print("Here is the error:", e)
