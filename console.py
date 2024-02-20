@@ -41,15 +41,14 @@ class HBNBCommand(cmd.Cmd):
         Usage: <class name>.<command>([<id> [<*args> or <**kwargs>]])
         (Brackets denote optional fields in usage example.)
         """
-        _cmd = _cls = _id = _args = line
+        _cmd = _cls = _id = _args = ''
 
         # scan for general formating - i.e '.', '(', ')'
         if not ('.' in line and '(' in line and ')' in line):
             return line
 
         try:  # parse line left to right
-            # pline = line[:]  # parsed line
-            pline = line  # Rashisky
+            pline = line[:]  # parsed line
 
             # isolate <class name>
             _cls = pline[:pline.find('.')]
@@ -69,8 +68,6 @@ class HBNBCommand(cmd.Cmd):
                 _id = pline[0].replace('\"', '')
                 # possible bug here:
                 # empty quotes register as empty _id when replaced
-                if not _id:  # Rashisky
-                    raise Exception
 
                 # if arguments exist beyond _id
                 pline = pline[2].strip()  # pline is now str
@@ -80,8 +77,6 @@ class HBNBCommand(cmd.Cmd):
                             and type(eval(pline)) is dict:
                         _args = pline
                     else:
-                        print("Else Statement")
-                        print(pline)  # Rashisky
                         _args = pline.replace(',', '')
                         print(_args)  # Rashisky
                         # _args = _args.replace('\"', '')
@@ -147,9 +142,7 @@ class HBNBCommand(cmd.Cmd):
                     new_instance.__dict__.update(**attributes)
                     print(new_instance.id)
                     new_instance.new()
-                    print("------------------------------")
                     storage.save()
-                    print("------------------------------")
 
         except Exception as e:
             print("Here is the error:", e)
