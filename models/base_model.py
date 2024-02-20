@@ -25,6 +25,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            self.save()
 
         else:
             kwargs['updated_at'] = datetime.strptime(kwargs['updated_at'],
