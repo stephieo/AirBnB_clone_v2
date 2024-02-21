@@ -11,10 +11,11 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 from os import getenv
+# from models.engine.file_storage import FileStorage
 
 
 class DBStorage:
-    """Alternate storage to FileStorage"""
+    """Alternate storage to FileStorage, i.e Database Storage"""
     __engine = None
     __session = None
 
@@ -46,13 +47,19 @@ class DBStorage:
                 data = self.__session.query(_cls)
                 for sql_stment in data:
                     key = type(sql_stment).__name__ + "." + sql_stment.id
+                    print(key, sql_stment, sep="=:")
                     objects.update({key: sql_stment})
+                    objects.update({key: sql_stment})
+
+        for value in objects.values():
+            # We don't want _sa_instance_state (default) present in our objects
+            if value.__dict__.get('_sa_instance_state'):
+                del [value.__dict__['_sa_instance_state']]
         return objects
 
     def new(self, obj):
         """add the obj to the current database session (self.__session)"""
         # We don't need to query, since we aren't interested
-        # in getting any data but to add
         self.__session.add(obj)
 
     def save(self):
@@ -63,7 +70,6 @@ class DBStorage:
         """Delete from the current database session obj if not None"""
         if obj:
             self.__session.delete(obj)
-        # Base.metadata.tables[]
 
     def reload(self):
         """create all tables in the database (feature of SQLAlchemy)"""

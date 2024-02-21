@@ -21,7 +21,7 @@ class State(BaseModel, Base):
         FileStorage relationship between State and City
         """
         from models import storage
-        all_objs = storage._FileStorage__objects
+        all_objs = storage.all()
         list_cities = []
         for k, v in all_objs.items():
             # since State.id is the primary key to City.state_id
