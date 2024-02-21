@@ -73,7 +73,7 @@ class HBNBCommand(cmd.Cmd):
                 pline = pline[2].strip()  # pline is now str
                 if pline:
                     # check for *args or **kwargs
-                    if pline[0] == '{' and pline[-1] =='}'\
+                    if pline[0] == '{' and pline[-1] == '}'\
                             and type(eval(pline)) is dict:
                         _args = pline
                     else:
@@ -117,7 +117,7 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, args):
         """ Create an object of any class"""
         # print("Here is the args received:", args)
-        args = args.split(" ") # splits the args received
+        args = args.split(" ")  # splits the args received
         try:
             if not args[0]:
                 print("** class name missing **")
@@ -129,10 +129,12 @@ class HBNBCommand(cmd.Cmd):
                     param, value = arg.split("=")[0], arg.split("=")[1]
                     if param in HBNBCommand.types:
                         value = eval(value)
-                        if (type(value) is not int and type(value) is not float):
+                        if (type(value) is not int and type(value)
+                           is not float):
                             return
                     elif (type(eval(value)) is str):
-                        value = value[1:-1].replace('_', ' ').replace('"', '\"')
+                        value = value[1:-1].replace('_', ' ').\
+                            replace('"', '\"')
                     else:
                         return
                     attributes[param] = value
@@ -209,7 +211,7 @@ class HBNBCommand(cmd.Cmd):
         key = c_name + "." + c_id
 
         try:
-            del(storage.all()[key])
+            del (storage.all()[key])
             storage.save()
         except KeyError:
             print("** no instance found **")
@@ -234,8 +236,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             for k, v in storage._FileStorage__objects.items():
                 print_list.append(str(v))
-        print("[",', '.join(print_list), "]", sep="")
-
+        print("[", ', '.join(print_list), "]", sep="")
 
     def help_all(self):
         """ Help information for the all command """
@@ -341,6 +342,7 @@ class HBNBCommand(cmd.Cmd):
         """ Help information for the update class """
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
