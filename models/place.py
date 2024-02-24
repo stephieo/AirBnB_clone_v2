@@ -53,7 +53,7 @@ class Place(BaseModel, Base):
         @property
         def amenities(self):
             """list of Amenity instances based on the attribute
-            amenity_ids that contians all Amenity.id linked to the
+            amenity_ids that contains all Amenity.id linked to the
             place"""
             return self.amenity_ids
 
@@ -61,6 +61,5 @@ class Place(BaseModel, Base):
         def amenities(self, obj):
             """handles append method for adding an Amenity.id
             to the attribute amenity_ids"""
-            if (type(obj).__name__ == 'Amenity' and
-               obj.id is not self.amenity_ids):
+            if (type(obj).__name__ == 'Amenity'):
                 self.amenity_ids.append(obj.id)
