@@ -10,7 +10,7 @@ place_amenity = Table('place_amenity', Base.metadata,
                       Column('place_id', String(60), ForeignKey("places.id"),
                              nullable=False, primary_key=True),
                       Column('amenity_id', String(60),
-                             ForeignKey('amenities.id'),
+                             ForeignKey('amenities.id'), primary_key=True,
                              nullable=False)
                       )
 
@@ -34,8 +34,7 @@ class Place(BaseModel, Base):
         reviews = relationship("Review", cascade="all, delete, delete-orphan",
                                backref="place")
         amenities = relationship("Amenity", secondary=place_amenity,
-                                 viewonly=False,
-                                 back_populates="place_amenities")
+                                 viewonly=False, backref="place_amenities")
     else:
         @property
         def reviews(self):
