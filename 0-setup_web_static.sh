@@ -10,8 +10,6 @@ else
 	sudo apt-get install -y nginx
 	sudo ufw allow  'Nginx HTTP'
 
-	echo "Hello World!" | sudo tee /var/www/html/index.debian.html
-	sudo service nginx restart
 fi
 
 # create folders && subfolders
