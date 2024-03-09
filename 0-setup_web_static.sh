@@ -15,20 +15,16 @@ else
 fi
 
 # create folders && subfolders
-mkdir -p "/data/" && cd "data"
-mkdir -p "web_static" && cd "web_static"
-mkdir -p "releases" "shared" && cd "releases"
-mkdir -p "test" && cd "test" && touch index.html
+mkdir -p "/data/web_static/shared." 
+mkdir -p "/data/web_static/releases/test/"
+#mkdir -p "web_static" && cd "web_static"
+#mkdir -p "releases" "shared" && cd "releases"
+cd /data/web_static/releases/test/data/web_static/releases/ && touch index.html
 
 # populate test file
 CONTENT="<!doctype html>
 <html>
 <head>
-    <title>Test Page</title>
-
-    <meta charset='utf-8' />
-    <meta http-equiv='Content-type' content='text/html; charset=utf-8' />
-    <meta name='viewport' content='width=device-width, initial-scale=1' />
 </head>
 
 <body>
@@ -39,14 +35,14 @@ CONTENT="<!doctype html>
 </body>
 </html>"
 
-echo $CONTENT > index.html
+echo $CONTENT | sudo tee  index.html
 
 # delte  symbolic link if exists and create new symlink 
-if [ -L /data/web_static/current ]; then
-	rm /data/web_static/current
-fi
+#if [ -L /data/web_static/current ]; then
+#	rm /data/web_static/current
+#fi
 
-ln -s /data/web_static/releases/test/ /data/web_static/current
+ln -sf /data/web_static/releases/test/ /data/web_static/current
 
 # change ownership of directory and contents
 sudo chown -R ubuntu:ubuntu /data/
