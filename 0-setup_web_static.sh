@@ -2,17 +2,17 @@
 # script to set up web servers for deployment of AirBnB_clone webstatic
 
 # check for NGINX and install if not found
-if (( "$ which nginx | grep - nginx > /dev/null"  == 0 ));then
-	echo "Already installed";
-else
-	echo "Begin installation"
+#if (( "$ which nginx | grep - nginx > /dev/null"  == 0 ));then
+#	echo "Already installed";
+#else
+#	echo "Begin installation"
 	sudo apt-get update
 	sudo apt-get install -y nginx
 	sudo ufw allow  'Nginx HTTP'
 
 	echo "Hello World!" | sudo tee /var/www/html/index.debian.html
 	sudo service nginx restart
-fi
+#fi
 
 # create folders && subfolders
 mkdir -p "/data/web_static/shared." 
