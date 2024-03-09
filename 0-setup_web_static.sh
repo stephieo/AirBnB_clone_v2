@@ -52,3 +52,7 @@ ln -s /data/web_static/releases/test/ /data/web_static/current
 sudo chown -R ubuntu:ubuntu /data/
 
 # INSERT NGINX CONFIG WITH ALIAS HERE
+sudo sed -i '/last line/ a    \\tlocation \/hbnb_static\/ {\n\t\talias \/data\/web_static\/current\/;\n\t}'
+
+# restart NGINX
+sudo service nginx restart
