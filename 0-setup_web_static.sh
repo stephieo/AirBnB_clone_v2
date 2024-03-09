@@ -19,7 +19,7 @@ mkdir -p "/data/web_static/releases/test/"
 # mkdir -p "web_static" && cd "web_static"
 # mkdir -p "releases" "shared" && cd "releases"
 
-cd /data/web_static/releases/test/data/web_static/releases/ && touch index.html
+cd /data/web_static/releases/test && touch index.html
 
 # populate test file
 CONTENT="<!doctype html>
@@ -35,14 +35,14 @@ CONTENT="<!doctype html>
 </body>
 </html>"
 
-echo $CONTENT | sudo tee  index.html
+echo "$CONTENT" | sudo tee  index.html
 
 # delte  symbolic link if exists and create new symlink 
 #if [ -L /data/web_static/current ]; then
 #	rm /data/web_static/current
 #fi
 
-ln -sf /data/web_static/releases/test/ /data/web_static/current
+sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 
 # change ownership of directory and contents
 sudo chown -R ubuntu:ubuntu /data/
