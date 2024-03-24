@@ -17,5 +17,11 @@ def hbnb():
     return "HBNB"
 
 
+@app.route("/c/<text>", strict_slashes=False)
+def c_is(text):
+    """return function using variable URL"""
+    ret = text.replace("_", " ")
+    return f"C {ret}"
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)
