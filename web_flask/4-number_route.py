@@ -24,5 +24,19 @@ def c_is(text):
     return f"C {ret}"
 
 
+@app.route("/python/", defaults={'text': "is cool"}, strict_slashes=False)
+@app.route("/python/<text>")
+def python_is(text):
+    """ return function using variable URL and defaults"""
+    ret = text.replace("_", " ")
+    return f"Python {ret}"
+
+
+@app.route("/number/<int:n>", strict_slashes=False)
+def number_is(n):
+    """ return function using variable URL and defaults"""
+    return f"{n} is a number"
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)
