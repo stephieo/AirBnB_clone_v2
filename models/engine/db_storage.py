@@ -80,3 +80,7 @@ class DBStorage:
         # ensures  each thread has its own unique session object,
         # preventing conflicts and ensuring thread safety
         self.__session = scoped_session(Session)()
+
+    def close(self):
+        """"closes a session  """
+        self.__session.remove()
