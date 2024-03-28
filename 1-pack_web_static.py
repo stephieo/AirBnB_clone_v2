@@ -5,7 +5,7 @@ from datetime import datetime
 
 @task
 def do_pack(c):
-    """ """
+    """ Compresses webstatic folder int tgz file"""
     current_date = datetime.now().strftime("%Y%m%d%H%M%S")
     archive_name = f"web_static_{current_date}.tgz"
     local("mkdir -p versions")
