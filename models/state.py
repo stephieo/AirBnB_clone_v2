@@ -25,6 +25,6 @@ class State(BaseModel, Base):
         list_cities = []
         for k, v in all_objs.items():
             # since State.id is the primary key to City.state_id
-            if (k.split(".")[0] == "City" and self.id == v.state_id]):
+            if (k.split(".")[0] == "City" and self.id == v.state_id):
                 list_cities.append(v)
         return list_cities
